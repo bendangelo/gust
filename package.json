@@ -1,0 +1,41 @@
+{
+  "name": "gust",
+  "version": "0.0.1",
+  "description": "Gives structure to javascript games",
+  "homepage": "https://github.com/bendangelo/gust",
+  "author": {
+    "name": "Ben D'Angelo",
+    "email": "ben.dangelo2@gmail.com",
+    "url": "http://bendangelo.me"
+  },
+  "main": "example/assets/vendor/gust.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bendangelo/gust.git"
+  },
+  "keywords": [
+    "game",
+    "engine"
+  ],
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "gitHead": "7b4361d420c788ae4d1ef2a5c29099db0b16cac4",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-uglify": "~0.2.0",
+    "grunt-contrib-concat": "~0.1.3",
+    "grunt-contrib-watch": "~0.3.1",
+    "grunt-dox": "~0.4.1",
+    "grunt-contrib-connect": "~0.2.0",
+    "grunt-mocha": "~0.3.1",
+    "grunt-contrib-coffee": "~0.6.6",
+    "grunt-contrib-jade": "~0.5.0"
+  },
+  "dependencies": {
+    "commander": "~1.1.1",
+    "ncp": "~0.4.2"
+  }
+}
