@@ -3,7 +3,9 @@ Game = {
     Scenes: {},
     Levels: [],
     Items: {},
-    Sprites: {},
+    Groups: {},
+    Systems: {},
+    Nodes: {},
 
     init: function() {
         this.tileSize = 25;
@@ -21,8 +23,8 @@ Game = {
         this.world.start();
     },
 
-    enter: function(name) {
-        this.sceneManager.enter(name);
+    enter: function() {
+        this.sceneManager.enter.apply(this.sceneManager, arguments);
     }
 
 };

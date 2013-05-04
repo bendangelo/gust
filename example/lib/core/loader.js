@@ -1,25 +1,29 @@
 Game.Loader = Gust.Events.extend({
 
-    path: "/assets/",
+    imagePath: "/assets/images/",
 
-    images: [
-      "images/bit.png",
-      "images/hero.png",
-      "images/items.png",
-      "images/tiles.png"
-    ],
+    images: {
+      // "images/bit.png",
+      "hero.png": {
+      },
+      "items.png": {
+      },
+      "tiles.png": {
+      }
+    },
 
     sounds: [
 
     ],
 
-    init: function(assetManager){
+    init: function(assetManager, sheetManager){
         this.pxloader = new PxLoader();
         this.assetManager = assetManager;
+        this.sheetManager = sheetManager;
 
         // add all assets
         for(var i in this.images){
-            this.pxloader.addImage(this.path + this.images[i]);
+            this.pxloader.addImage(this.imagePath + i);
         }
 
         // TOODO
@@ -32,9 +36,20 @@ Game.Loader = Gust.Events.extend({
     },
 
     _onComplete: function(e){
-        this.assetManager.add(e.resource.img);
+        var image = e.resource.img;
+        var srcName = Gust.AssetManager.srcName(image.src);
 
-        this.trigger("complete");
+        this.assetManager.add(image, srcName);
+
+        var sheetData = this.images[srcName];
+        sheetData.images = [image];
+        sheetData.frames = {
+            width: 25, height: 25
+        };
+
+        this.sheetManager.add(srcName, sheetData);
+
+        this.trigger("complete", e);
     },
 
     _onProgress: function(e){

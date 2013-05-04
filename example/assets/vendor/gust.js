@@ -369,6 +369,27 @@ Gust.Events = Gust.Class.extend({
     }
 
 });
+Gust.Manager = Gust.Events.extend({
+
+    init: function(){
+        this.items = {};
+    },
+
+    add: function(key, value){
+        this.items[key] = value;
+
+        return this;
+    },
+
+    get: function(key){
+        return this.items[key];
+    },
+
+    remove: function(){
+
+    }
+
+});
 Gust.Scene = Gust.Events.extend({
 
     init: function(world){
@@ -495,29 +516,33 @@ Gust.World = Gust.Class.extend({
         }
 
         this.sceneManager.draw(this.context);
+    },
+
+    addNode: function(nodes){
+        nodes = [].concat(nodes);
+
+        this.groupManager.addNode(nodes);
     }
 
 });
-Gust.AssetManager = Gust.Class.extend({
+Gust.AssetManager = Gust.Manager.extend({
 
-    init: function(){
-        this.assets = {};
-    },
+    add: function(asset, key){
+        if(!key){
+            key = Gust.AssetManager.getSrcName(asset.src);
+        }
 
-    add: function(asset){
-        var path = asset.src.split("/");
-        var name = path[path.length-1];
-
-        this.assets[name] = asset;
+        this.items[key] = asset;
 
         return this;
-    },
-
-    get: function(name){
-        return this.assets[name];
     }
 
 });
+
+Gust.AssetManager.srcName = function(src){
+    var path = src.split("/");
+    return path[path.length-1];
+};
 /*
 The GroupManager will add / remove nodes from groups.
 
@@ -529,7 +554,7 @@ Example:
     });
 
 */
-Gust.GroupManager = Gust.Class.extend({
+Gust.GroupManager = Gust.Manager.extend({
 
     init: function() {
         this.groups = {};
@@ -544,24 +569,16 @@ Gust.GroupManager = Gust.Class.extend({
     }
 
 });
-Gust.SceneManager = Gust.Class.extend({
+Gust.SceneManager = Gust.Manager.extend({
 
     current: null,
-
-    init: function() {
-        this.scenes = {};
-    },
-
-    add: function(name, scene) {
-        this.scenes[name] = scene;
-    },
 
     enter: function(name, options) {
         if (this.current) {
             this.current.exit();
         }
 
-        this.current = this.scenes[name];
+        this.current = this.items[name];
 
         console.assert(this.current, "Scene selected is null");
 
@@ -589,7 +606,7 @@ Example:
     });
 
 */
-Gust.Group = Gust.Class.extend({
+Gust.Group = Gust.Events.extend({
 
     init: function(nodes){
         this.nodes = [];
@@ -599,8 +616,43 @@ Gust.Group = Gust.Class.extend({
         }
     },
 
-    add: function(nodes){
-        this.nodes = this.nodes.concat(nodes);
+    add: function(nodes, options){
+        nodes = [].concat(nodes);
+
+        for(var i in nodes){
+            this.nodes.push(nodes[i]);
+
+            this.trigger("add", nodes[i]);
+        }
+
+        return this;
+    },
+
+    remove: function(nodes, options){
+        nodes = [].concat(nodes);
+
+        for(var i in nodes){
+            var node = nodes[i];
+            var index = this.nodes.indexOf(node);
+
+            if(index != -1){
+                this.nodes.splice(index, 1);
+
+                this.trigger("remove", node);
+            }
+        }
+
+        return this;
+    },
+
+    at: function(index){
+        return this.nodes[index];
+    },
+
+    clear: function(){
+        while(this.nodes.length){
+            this.trigger("remove", this.nodes.pop());
+        }
 
         return this;
     }

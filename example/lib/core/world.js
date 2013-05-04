@@ -3,6 +3,7 @@ Game.World = Gust.World.extend({
     init: function(){
         Gust.World.prototype.init.call(this, document.getElementById("game-canvas"));
 
+        this.sheetManager = new Game.SheetManager();
         this.soundManager = soundManager;
 
         this.soundManager.setup({

@@ -1,7 +1,7 @@
 Game.Scenes.Load = Game.Scene.extend({
 
   enter: function() {
-    this.loader = new Game.Loader(Game.world.assetManager);
+    this.loader = new Game.Loader(this.world.assetManager, this.world.sheetManager);
 
     this.listenTo(this.loader, "complete", this.onComplete);
     this.listenTo(this.loader, "progress", this.onProgress);
@@ -18,7 +18,7 @@ Game.Scenes.Load = Game.Scene.extend({
     this.world.stage.removeChild(this.text);
   },
 
-  onComplete: function() {
+  onComplete: function(e) {
     Game.sceneManager.enter("home");
   },
 

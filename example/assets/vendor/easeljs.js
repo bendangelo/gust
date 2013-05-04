@@ -3,7 +3,7 @@
 * Visit http://createjs.com/ for documentation, updates and examples.
 *
 * Copyright (c) 2011 gskinner.com, inc.
-* 
+*
 * Distributed under the terms of the MIT license.
 * http://www.opensource.org/licenses/mit-license.html
 *
@@ -1135,7 +1135,7 @@ this.createjs = this.createjs || {};
     }
     this._dirty = this._active = true;
     var arcTo = this._ctx.arcTo, lineTo = this._ctx.lineTo;
-    this._activeInstructions.push(new Command(this._ctx.moveTo, [x + w - radiusTR, y]), new Command(arcTo, [x + w + radiusTR * mTR, y - radiusTR * mTR, x + w, y + radiusTR, radiusTR]), new Command(lineTo, [x + w, y + h - radiusBR]), new Command(arcTo, [x + w + radiusBR * mBR, y + h + radiusBR * mBR, x + w - radiusBR, y + h, radiusBR]), new Command(lineTo, [x + radiusBL, y + h]), new Command(arcTo, [x - radiusBL * mBL, y + h + radiusBL * mBL, x, y + h - radiusBL, radiusBL]), new Command(lineTo, [x, 
+    this._activeInstructions.push(new Command(this._ctx.moveTo, [x + w - radiusTR, y]), new Command(arcTo, [x + w + radiusTR * mTR, y - radiusTR * mTR, x + w, y + radiusTR, radiusTR]), new Command(lineTo, [x + w, y + h - radiusBR]), new Command(arcTo, [x + w + radiusBR * mBR, y + h + radiusBR * mBR, x + w - radiusBR, y + h, radiusBR]), new Command(lineTo, [x + radiusBL, y + h]), new Command(arcTo, [x - radiusBL * mBL, y + h + radiusBL * mBL, x, y + h - radiusBL, radiusBL]), new Command(lineTo, [x,
     y + radiusTL]), new Command(arcTo, [x - radiusTL * mTL, y - radiusTL * mTL, x + radiusTL, y, radiusTL]), new Command(this._ctx.closePath));
     return this
   };

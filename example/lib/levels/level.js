@@ -1,18 +1,49 @@
 Game.Level = Gust.Class.extend({
 
-  init: function() {
+  init: function(world) {
+    this.world = world;
 
+    this.collectables = new Game.Groups.Collectables();
+    this.tilemap = new Game.Groups.Tilemap(this.map);
+    this.hitmap = new Game.Groups.Hitmap(this.map);
+
+    this.hitmapSystem = new Game.Systems.Hitmap(this.hitmap);
   },
 
-  build: function() {
+  build: function(levelData) {
+    this.placeTiles(levelData.map);
 
+    this.placeHero();
+
+    this.placeItems();
   },
 
   teardown: function() {
 
   },
 
-  placeTiles: function() {
+  placeTiles: function(map) {
+
+    var spriteSheet = this.world.sheetManager.get("tiles.png");
+    var tileId;
+
+    for(var y = 0; y < map.length; y++){
+
+      for(var x = 0; x < map[0].length; x++){
+        tileId = map[y][x] - 1;
+
+        if(tileId == -1) continue;
+
+        var tile = new Game.Tile(spriteSheet, tileId, x, y);
+
+        this.tilemap.set(x, y, tile);
+
+        this.hitmap.set(x, y, tile.walkable);
+
+        this.world.stage.addChild(tile.tileView);
+      }
+
+    }
 
   },
 
@@ -22,6 +53,14 @@ Game.Level = Gust.Class.extend({
 
   placeHero: function() {
 
+  },
+
+  draw: function(){
+
+  },
+
+  update: function(){
+    this.hitmapSystem.processAll();
   }
 
 });
