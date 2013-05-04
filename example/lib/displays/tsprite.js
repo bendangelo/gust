@@ -1,7 +1,7 @@
 /*
 The tsprite component is a simple extension to sprite that defaults the size attributes.
 */
-re.c('tsprite')
+/*re.c('tsprite')
 .requires('sprite render')
 .init(function(){
   this.sizeX = re.tile.sizeX;
@@ -14,4 +14,4 @@ re.c('tsprite')
   this.regX = this.sizeX * 0.5;
   this.regY = this.sizeY * 0.5;
 
-});
+});*/

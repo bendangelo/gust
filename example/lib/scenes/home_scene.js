@@ -1,4 +1,4 @@
-Game.Scenes.Home = Gust.Scene.extend({
+Game.Scenes.Home = Game.Scene.extend({
 
     enter: function(){
 

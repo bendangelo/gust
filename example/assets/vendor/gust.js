@@ -345,16 +345,35 @@ Gust.Events = Gust.Class.extend({
         return this;
     },
 
-    listenTo: function(){
-        console.assert(false);
+    listenTo: function(target, type, callback){
+        if(!this._listens){
+            this._listens = [];
+        }
+
+        target.on(type, callback, this);
+
+        this._listens.push({target: target, type: type, callback: callback});
+
+        return this;
     },
 
     stopListening: function(){
-        console.assert(false);
+        // remove all for now
+        var e;
+        for(var i in this._listens){
+            e = this._listens[i];
+
+            e.target.off(e.type, e.callback);
+        }
+        return this;
     }
 
 });
-Gust.Scene = Gust.Class.extend({
+Gust.Scene = Gust.Events.extend({
+
+    init: function(world){
+        this.world = world;
+    },
 
     enter: function() {
 
@@ -364,11 +383,11 @@ Gust.Scene = Gust.Class.extend({
 
     },
 
-    update: function(){
+    update: function(tick){
 
     },
 
-    draw: function(){
+    draw: function(context){
 
     }
 
@@ -401,6 +420,7 @@ Gust.World = Gust.Class.extend({
 
         this.sceneManager = new Gust.SceneManager();
         this.groupManager = new Gust.GroupManager();
+        this.assetManager = new Gust.AssetManager();
 
         // find supported animation frame
         this.requestAnimationFrame =
@@ -425,6 +445,9 @@ Gust.World = Gust.Class.extend({
         }
 
         this.context = this.canvas.getContext('2d');
+
+        this.width = this.canvas.width;
+        this.height = this.canvas.height;
 
         return this;
     },
@@ -462,7 +485,7 @@ Gust.World = Gust.Class.extend({
         var count = 0;
 
         while(this.stepProgress >= this.stepSize){
-            this.sceneManager.update();
+            this.sceneManager.update(this.stepSize);
 
             this.stepProgress -= this.stepSize;
 
@@ -471,7 +494,27 @@ Gust.World = Gust.Class.extend({
             }
         }
 
-        this.sceneManager.draw();
+        this.sceneManager.draw(this.context);
+    }
+
+});
+Gust.AssetManager = Gust.Class.extend({
+
+    init: function(){
+        this.assets = {};
+    },
+
+    add: function(asset){
+        var path = asset.src.split("/");
+        var name = path[path.length-1];
+
+        this.assets[name] = asset;
+
+        return this;
+    },
+
+    get: function(name){
+        return this.assets[name];
     }
 
 });
@@ -488,11 +531,15 @@ Example:
 */
 Gust.GroupManager = Gust.Class.extend({
 
-    init: function(){
+    init: function() {
         this.groups = {};
     },
 
-    add: function(group, condition){
+    add: function(group, condition) {
+
+    },
+
+    addNode: function(node) {
 
     }
 
@@ -516,15 +563,17 @@ Gust.SceneManager = Gust.Class.extend({
 
         this.current = this.scenes[name];
 
+        console.assert(this.current, "Scene selected is null");
+
         this.current.enter(options);
     },
 
-    update: function() {
-        this.current.update();
+    update: function(tick) {
+        this.current.update(tick);
     },
 
-    draw: function() {
-        this.current.draw();
+    draw: function(context) {
+        this.current.draw(context);
     }
 
 });
@@ -558,6 +607,18 @@ Gust.Group = Gust.Class.extend({
 
 });
 Gust.Node = Gust.Events.extend({
+
+    init: function(){
+
+    },
+
+    activate: function(){
+
+    },
+
+    deactivate: function(){
+
+    }
 
 });
 

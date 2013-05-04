@@ -1,15 +1,29 @@
-Game.Scenes.Load = Gust.Scene.extend({
+Game.Scenes.Load = Game.Scene.extend({
 
-  enter: function(){
-      this.loader = new Game.Loader();
+  enter: function() {
+    this.loader = new Game.Loader(Game.world.assetManager);
 
-      this.listenTo(this.loader, "complete", this.onComplete);
+    this.listenTo(this.loader, "complete", this.onComplete);
+    this.listenTo(this.loader, "progress", this.onProgress);
 
-      this.loader.start();
+    this.text = new createjs.Text("Loading", "20px Ariel", "#000000");
+    this.text.y = this.world.height - this.text.getMeasuredHeight();
+
+    this.world.stage.addChild(this.text);
+
+    this.loader.start();
   },
 
-  onComplete: function(){
+  exit: function() {
+    this.world.stage.removeChild(this.text);
+  },
+
+  onComplete: function() {
     Game.sceneManager.enter("home");
+  },
+
+  onProgress: function(e) {
+    this.text.text = "Loading " + (e.completedCount / e.totalCount) * 100 + "%";
   }
 
 });

@@ -41,8 +41,6 @@ program
             console.log("npm install");
             console.log("sudo npm install grunt -g");
             console.log("grunt server");
-            console.log("");
-            console.log("Checkout http://www.entityjs.com for help");
        });
 
     });

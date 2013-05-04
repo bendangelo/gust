@@ -1,2 +1,2 @@
-re.c('tile')
-.requires('tsprite tiles.png');
+/*re.c('tile')
+.requires('tsprite tiles.png');*/

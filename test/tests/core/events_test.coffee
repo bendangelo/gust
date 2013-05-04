@@ -20,3 +20,7 @@ describe "core/events", ->
         event.off()
 
         expect(event._events.trigger).to.not.exist
+
+    it "should listento"
+
+    it "should stoplistening"

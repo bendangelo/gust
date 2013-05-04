@@ -1,31 +1,28 @@
 Game = {
 
     Scenes: {},
-    Levels: {},
+    Levels: [],
     Items: {},
-    Graphics: {},
+    Sprites: {},
 
-    init: function(){
+    init: function() {
         this.tileSize = 25;
 
         this.world = new Game.World();
         this.sceneManager = this.world.sceneManager;
 
-        for(var i in Game.Scenes){
-            this.sceneManager.add(i.toLowerCase(), new Game.Scenes[i]());
+        for (var i in this.Scenes) {
+            this.sceneManager.add(i.toLowerCase(), new this.Scenes[i](this.world));
         }
 
-        // start running entities
-        this.world.start();
-
+        // start running nodes
         this.enter("load");
+
+        this.world.start();
     },
 
-    enter: function(name){
+    enter: function(name) {
         this.sceneManager.enter(name);
     }
 
 };
-
-// entry point
-Game.init();

@@ -1,4 +1,32 @@
-re.c('level')
+Game.Level = Gust.Class.extend({
+
+  init: function() {
+
+  },
+
+  build: function() {
+
+  },
+
+  teardown: function() {
+
+  },
+
+  placeTiles: function() {
+
+  },
+
+  placeItems: function() {
+
+  },
+
+  placeHero: function() {
+
+  }
+
+});
+
+/*re.c('level')
 .defines({
 
   build:function(){
@@ -85,4 +113,4 @@ re.c('level')
 
   }
 
-});
+});*/

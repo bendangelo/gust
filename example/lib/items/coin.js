@@ -1,4 +1,4 @@
-re.c('coin')
+/*re.c('coin')
 .requires('item animate')
 .defines({
 
@@ -29,4 +29,4 @@ re.c('coin')
 })
 //accepted tile frames in items.png which will become coins
 .alias('t14')
-.alias('t15');
+.alias('t15');*/
