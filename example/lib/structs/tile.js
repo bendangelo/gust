@@ -13,11 +13,11 @@ Game.Tile = Gust.Events.extend({
 
     setTileId: function(tileId) {
 
-        this.walkable = tileId == -1;
+        this.walkable = tileId == Game.Tile.BLANK;
         this.tileView.gotoAndStop(tileId);
 
         // tile -1 is invisible
-        this.tileView.visible = tileId != -1;
+        this.tileView.visible = tileId != Game.Tile.BLANK;
     },
 
     tileX: function(x) {
@@ -40,6 +40,12 @@ Game.Tile = Gust.Events.extend({
         }
 
         return this._tileY;
+    },
+
+    addToWorld: function(world){
+        world.stage.addChild(this.tileView);
     }
 
 });
+
+Game.Tile.BLANK = -1;

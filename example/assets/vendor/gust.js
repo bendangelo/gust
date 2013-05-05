@@ -225,10 +225,14 @@ Gust.$ = function(id){
         base = instance.constructor.__base__,
         // Get all the decorators in the arguments.
         decorators = ArrayProto.slice.call(arguments, 1),
-        len = decorators.length;
+        len = decorators.length,
+        result;
 
       for (i = 0; i < len; i++) {
-        copy(decorators[i].call(instance, base), instance);
+
+        result = (typeof mixins[i] === 'function') ? decorators[i].call(instance, base) : mixins[i];
+
+        copy(result, instance);
       }
     };
 
@@ -271,10 +275,14 @@ Gust.$ = function(id){
         base = definition.__base__,
         // Get all the mixins in the arguments.
         mixins = ArrayProto.slice.call(arguments, 1),
-        len = mixins.length;
+        len = mixins.length,
+        result;
 
       for (i = 0; i < len; i++) {
-        copy(mixins[i](base), definition.prototype);
+
+        result = (typeof mixins[i] === 'function') ? mixins[i](base) : mixins[i];
+
+        copy(result, definition.prototype);
       }
     };
 
@@ -560,12 +568,31 @@ Gust.GroupManager = Gust.Manager.extend({
         this.groups = {};
     },
 
-    add: function(group, condition) {
+    add: function(key, group, condition) {
+        if(typeof condition == "object"){
+            var type = condition;
+            // default to instanceof
+            condition = function(node){
+              return node instanceof type;
+            };
+        }
 
+        this.groups[key] = condition;
+
+        return Gust.Manager.prototype.add.call(this, key, group);
     },
 
     addNode: function(node) {
+        for (var i in this.items) {
+            var group = this.items[i];
+            var condition = this.groups[i];
 
+            if (condition.call(this, node, group)) {
+                group.add(node);
+            }
+        }
+
+        return this;
     }
 
 });
@@ -661,14 +688,6 @@ Gust.Group = Gust.Events.extend({
 Gust.Node = Gust.Events.extend({
 
     init: function(){
-
-    },
-
-    activate: function(){
-
-    },
-
-    deactivate: function(){
 
     }
 

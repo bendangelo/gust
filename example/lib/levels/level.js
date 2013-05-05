@@ -6,33 +6,37 @@ Game.Level = Gust.Class.extend({
     this.collectables = new Game.Groups.Collectables();
     this.tilemap = new Game.Groups.Tilemap(this.map);
     this.hitmap = new Game.Groups.Hitmap(this.map);
+    this.bodies = new Game.Groups.Bodies();
 
-    this.hitmapSystem = new Game.Systems.Hitmap(this.hitmap);
+    this.hitmapSystem = new Game.Systems.Hitmap(this.hitmap, this.bodies);
+
+    this.world.groupManager.add("bodies", this.bodies, Game.Nodes.Body);
+
   },
 
   build: function(levelData) {
-    this.placeTiles(levelData.map);
+    this.buildTiles(levelData.map);
 
-    this.placeHero();
+    this.buildHero(levelData.hero);
 
-    this.placeItems();
+    this.buildItems();
   },
 
   teardown: function() {
 
   },
 
-  placeTiles: function(map) {
+  buildTiles: function(mapData) {
 
     var spriteSheet = this.world.sheetManager.get("tiles.png");
     var tileId;
 
-    for(var y = 0; y < map.length; y++){
+    for (var y = 0; y < mapData.length; y++) {
 
-      for(var x = 0; x < map[0].length; x++){
-        tileId = map[y][x] - 1;
+      for (var x = 0; x < mapData[0].length; x++) {
+        tileId = mapData[y][x] - 1;
 
-        if(tileId == -1) continue;
+        if (tileId == Game.Tile.BLANK) continue;
 
         var tile = new Game.Tile(spriteSheet, tileId, x, y);
 
@@ -40,26 +44,30 @@ Game.Level = Gust.Class.extend({
 
         this.hitmap.set(x, y, tile.walkable);
 
-        this.world.stage.addChild(tile.tileView);
+        tile.addToWorld(this.world);
       }
 
     }
 
   },
 
-  placeItems: function() {
+  buildItems: function(itemsData) {
 
   },
 
-  placeHero: function() {
+  buildHero: function(heroData) {
+    var spriteSheet = this.world.sheetManager.get("tiles.png");
+
+    this.hero = new Game.Hero(spriteSheet, heroData.x, heroData.y);
+
+    this.hero.addToWorld(this.world);
+  },
+
+  draw: function() {
 
   },
 
-  draw: function(){
-
-  },
-
-  update: function(){
+  update: function() {
     this.hitmapSystem.processAll();
   }
 

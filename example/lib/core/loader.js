@@ -5,6 +5,12 @@ Game.Loader = Gust.Events.extend({
     images: {
       // "images/bit.png",
       "hero.png": {
+        animations: {
+            run: [],
+            idle: [],
+            jump: [],
+            climb: []
+        }
       },
       "items.png": {
       },
@@ -26,7 +32,7 @@ Game.Loader = Gust.Events.extend({
             this.pxloader.addImage(this.imagePath + i);
         }
 
-        // TOODO
+        // TODO
         for(var s in this.sounds){
 
         }

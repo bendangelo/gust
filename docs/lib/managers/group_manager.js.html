@@ -32,12 +32,31 @@ this.groupManager.track(new Gust.Monsters(), function(e){
         this.groups = {};
     },
 
-    add: function(group, condition) {
+    add: function(key, group, condition) {
+        if(typeof condition == &quot;object&quot;){
+            var type = condition;
+            // default to instanceof
+            condition = function(node){
+              return node instanceof type;
+            };
+        }
 
+        this.groups[key] = condition;
+
+        return Gust.Manager.prototype.add.call(this, key, group);
     },
 
     addNode: function(node) {
+        for (var i in this.items) {
+            var group = this.items[i];
+            var condition = this.groups[i];
 
+            if (condition.call(this, node, group)) {
+                group.add(node);
+            }
+        }
+
+        return this;
     }
 
 });</code></pre></div></div></div><!-- Foundation JS--><script src="http://cdnjs.cloudflare.com/ajax/libs/foundation/3.2.2/javascripts/foundation.min.js"></script><script>/**
