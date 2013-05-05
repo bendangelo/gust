@@ -6,10 +6,10 @@ Game.Loader = Gust.Events.extend({
       // "images/bit.png",
       "hero.png": {
         animations: {
-            run: [],
-            idle: [],
-            jump: [],
-            climb: []
+            idle: [0, 1],
+            run: [2, 3],
+            jump: [4, 5],
+            climb: [6, 7]
         }
       },
       "items.png": {
@@ -42,6 +42,11 @@ Game.Loader = Gust.Events.extend({
     },
 
     _onComplete: function(e){
+        this.trigger("complete", e);
+    },
+
+    _onProgress: function(e){
+
         var image = e.resource.img;
         var srcName = Gust.AssetManager.srcName(image.src);
 
@@ -55,10 +60,6 @@ Game.Loader = Gust.Events.extend({
 
         this.sheetManager.add(srcName, sheetData);
 
-        this.trigger("complete", e);
-    },
-
-    _onProgress: function(e){
         this.trigger("progress", e);
     },
 

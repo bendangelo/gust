@@ -29,17 +29,11 @@ this.groupManager.track(new Gust.Monsters(), function(e){
 </code></pre></div><pre><code class="language-javascript">Gust.GroupManager = Gust.Manager.extend({
 
     init: function() {
+        Gust.Manager.prototype.init.apply(this, arguments);
         this.groups = {};
     },
 
     add: function(key, group, condition) {
-        if(typeof condition == &quot;object&quot;){
-            var type = condition;
-            // default to instanceof
-            condition = function(node){
-              return node instanceof type;
-            };
-        }
 
         this.groups[key] = condition;
 

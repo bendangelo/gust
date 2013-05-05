@@ -10,7 +10,9 @@ Game.Level = Gust.Class.extend({
 
     this.hitmapSystem = new Game.Systems.Hitmap(this.hitmap, this.bodies);
 
-    this.world.groupManager.add("bodies", this.bodies, Game.Nodes.Body);
+    this.world.groupManager.add("bodies", this.bodies, function(node){
+      return node instanceof Game.Nodes.Body;
+    });
 
   },
 
@@ -56,7 +58,8 @@ Game.Level = Gust.Class.extend({
   },
 
   buildHero: function(heroData) {
-    var spriteSheet = this.world.sheetManager.get("tiles.png");
+    var spriteSheet = this.world.sheetManager.get("hero.png");
+    debugger
 
     this.hero = new Game.Hero(spriteSheet, heroData.x, heroData.y);
 

@@ -1,4 +1,4 @@
-Game.Groups.Bodies = Gust.Groups.extend({
+Game.Groups.Bodies = Gust.Group.extend({
 
 
 
