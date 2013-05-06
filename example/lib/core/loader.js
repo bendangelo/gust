@@ -50,7 +50,7 @@ Game.Loader = Gust.Events.extend({
         var image = e.resource.img;
         var srcName = Gust.AssetManager.srcName(image.src);
 
-        this.assetManager.add(image, srcName);
+        this.assetManager.add(srcName, image);
 
         var sheetData = this.images[srcName];
         sheetData.images = [image];

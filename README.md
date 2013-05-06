@@ -43,7 +43,7 @@ Gust uses a entity-system like architecture to handle updating / drawing logic. 
 ## Feature List
 
 * **Grunt** is used for task running
-* `Class.extend` method for creating classes
+* [Fiber](https://github.com/linkedin/Fiber) used for class creation, aliased to **Class**
 * `Events` class for handling events
 * `Scene` and `SceneManager` class deal with scene managment
 * `World` class that creates a canvas context and controls main loop
@@ -56,45 +56,71 @@ Gust uses a entity-system like architecture to handle updating / drawing logic. 
 
 Gust is not a game engine and does not provide support for graphics, sounds, preloading, input. Gust is felxible enough to work with almost every library, so its easy to plugin whatever you like. Here is a list of awesome libraries you can use:
 
-### Graphics
+### 2D Graphics
 
-[EaselJS](http://www.createjs.com/#!/EaselJS)
-[KineticJS](http://kineticjs.com/)
+* [EaselJS](http://www.createjs.com/#!/EaselJS)
+* [KineticJS](http://kineticjs.com/)
+
+### 3D Graphics
+
+* [three.js](https://github.com/mrdoob/three.js/)
+
+### Math
+
+* [rift](https://github.com/bendangelo/rift)
 
 ### Sound
 
-[SoundJS](http://www.createjs.com/#!/SoundJS)
-[SoundManager2](http://www.schillmania.com/projects/soundmanager2/)
-[Buzz](http://buzz.jaysalvat.com/)
+* [SoundJS](http://www.createjs.com/#!/SoundJS)
+* [SoundManager2](http://www.schillmania.com/projects/soundmanager2/)
+* [Buzz](http://buzz.jaysalvat.com/)
 
 ### Preloading
 
-[pxloader](http://thinkpixellab.com/pxloader/)
-[PreloadJS](http://www.createjs.com/#!/PreloadJS)
+* [pxloader](http://thinkpixellab.com/pxloader/)
+* [PreloadJS](http://www.createjs.com/#!/PreloadJS)
 
 ### Input
 
-[keymaster](https://github.com/madrobby/keymaster)
-[mousetrap](http://craig.is/killing/mice)
+* [keymaster](https://github.com/madrobby/keymaster)
+* [mousetrap](http://craig.is/killing/mice)
+* [KeyboardJS](https://github.com/RobertWHurst/KeyboardJS/)
 
 ### Physics
 
-[box2dweb](https://code.google.com/p/box2dweb/)
+* [box2dweb](https://code.google.com/p/box2dweb/)
 
 ### Tasks
 
-[grunt-preload-assets](https://github.com/gunta/grunt-preload-assets)
-[grunt-contrib-qunit](https://github.com/gruntjs/grunt-contrib-qunit)
+* [grunt-preload-assets](https://github.com/gunta/grunt-preload-assets)
+* [grunt-contrib-qunit](https://github.com/gruntjs/grunt-contrib-qunit)
 
 ### Animation
 
-[TweenJS](http://www.createjs.com/#!/TweenJS)
+* [TweenJS](http://www.createjs.com/#!/TweenJS)
+* [GreenSock](http://www.greensock.com/get-started-js/)
+* [shifty](https://github.com/jeremyckahn/shifty)
+
+### Utilities
+
+* [lodash](https://github.com/bestiejs/lodash)
+* [underscore](http://underscorejs.org/)
+* [sugar](http://sugarjs.com/)
 
 ### Testing
 
-[js-factories](https://github.com/matthijsgroen/js-factories)
+* [js-factories](https://github.com/matthijsgroen/js-factories)
 
 ### Other
+
+* [PathFinding.js](https://github.com/qiao/PathFinding.js)
+* [Modernizr](http://modernizr.com/)
+
+Find more tiny libraries here: [microjs](http://microjs.com/#)
+
+## Support
+
+IE9+
 
 ## Contributing
 
