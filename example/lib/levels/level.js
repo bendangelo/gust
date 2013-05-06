@@ -59,7 +59,6 @@ Game.Level = Gust.Class.extend({
 
   buildHero: function(heroData) {
     var spriteSheet = this.world.sheetManager.get("hero.png");
-    debugger
 
     this.hero = new Game.Hero(spriteSheet, heroData.x, heroData.y);
 

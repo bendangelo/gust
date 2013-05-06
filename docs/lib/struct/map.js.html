@@ -17,20 +17,92 @@ code {
   div.description {margin: 14px 0; padding-top: 14px; border-top:1px solid #eee; border-bottom:1px solid #eee; }
   .tags {}
     .tags .types {color:#666}
-.ctx-type { float:right; margin-top:8px }</style></head><body><div class="row"><div class="twelve columns"><h1 class="pagetitle">Entity</h1></div></div><div class="row"><div id="nav" class="three columns"><ul class="side-nav"><li><a href="../../../docs/lib/core/class.js.html">lib/core/class.js</a><ul><li><a href="../../../docs/lib/core/class.js.html#Class">Class</a></li></ul></li><li><a href="../../../docs/lib/core/events.js.html">lib/core/events.js</a><ul><li><a href="../../../docs/lib/core/events.js.html#Events">Events</a></li></ul></li><li><a href="../../../docs/lib/core/manager.js.html">lib/core/manager.js</a><ul><li><a href="../../../docs/lib/core/manager.js.html#Manager">Manager</a></li></ul></li><li><a href="../../../docs/lib/core/timer.js.html">lib/core/timer.js</a><ul><li><a href="../../../docs/lib/core/timer.js.html#Timer">Timer</a></li></ul></li><li><a href="../../../docs/lib/core/world.js.html">lib/core/world.js</a><ul><li><a href="../../../docs/lib/core/world.js.html#World">World</a></li></ul></li><li><a href="../../../docs/lib/footer.js.html">lib/footer.js</a><ul></ul></li><li><a href="../../../docs/lib/header.js.html">lib/header.js</a><ul></ul></li><li><a href="../../../docs/lib/managers/asset_manager.js.html">lib/managers/asset_manager.js</a><ul><li><a href="../../../docs/lib/managers/asset_manager.js.html#AssetManager">AssetManager</a></li></ul></li><li><a href="../../../docs/lib/managers/group_manager.js.html">lib/managers/group_manager.js</a><ul><li><a href="../../../docs/lib/managers/group_manager.js.html#GroupManager">GroupManager</a></li></ul></li><li><a href="../../../docs/lib/managers/scene_manager.js.html">lib/managers/scene_manager.js</a><ul><li><a href="../../../docs/lib/managers/scene_manager.js.html#SceneManager">SceneManager</a></li></ul></li><li><a href="../../../docs/lib/struct/group.js.html">lib/struct/group.js</a><ul><li><a href="../../../docs/lib/struct/group.js.html#Group">Group</a></li></ul></li><li><a href="../../../docs/lib/struct/map.js.html">lib/struct/map.js</a><ul><li><a href="../../../docs/lib/struct/map.js.html#Map">Map</a></li></ul></li><li><a href="../../../docs/lib/struct/node.js.html">lib/struct/node.js</a><ul><li><a href="../../../docs/lib/struct/node.js.html#Node">Node</a></li></ul></li><li><a href="../../../docs/lib/struct/scene.js.html">lib/struct/scene.js</a><ul><li><a href="../../../docs/lib/struct/scene.js.html#Scene">Scene</a></li></ul></li><li><a href="../../../docs/lib/struct/system.js.html">lib/struct/system.js</a><ul><li><a href="../../../docs/lib/struct/system.js.html#System">System</a></li></ul></li><li><a href="../../../docs/lib/vendor/fiber.js.html">lib/vendor/fiber.js</a><ul></ul></li></ul></div><div class="nine columns"><div class="comment"><div class="label radius ctx-type">property</div><h1 id="Timer">Timer</h1><h5 class="subheader">Gust.Timer</h5><div class="tags"><ul class="no-bullet"></ul></div><div class="description"></div><pre><code class="language-javascript">Gust.Timer = Gust.Class.extend({
+.ctx-type { float:right; margin-top:8px }</style></head><body><div class="row"><div class="twelve columns"><h1 class="pagetitle">Entity</h1></div></div><div class="row"><div id="nav" class="three columns"><ul class="side-nav"><li><a href="../../../docs/lib/core/class.js.html">lib/core/class.js</a><ul><li><a href="../../../docs/lib/core/class.js.html#Class">Class</a></li></ul></li><li><a href="../../../docs/lib/core/events.js.html">lib/core/events.js</a><ul><li><a href="../../../docs/lib/core/events.js.html#Events">Events</a></li></ul></li><li><a href="../../../docs/lib/core/manager.js.html">lib/core/manager.js</a><ul><li><a href="../../../docs/lib/core/manager.js.html#Manager">Manager</a></li></ul></li><li><a href="../../../docs/lib/core/timer.js.html">lib/core/timer.js</a><ul><li><a href="../../../docs/lib/core/timer.js.html#Timer">Timer</a></li></ul></li><li><a href="../../../docs/lib/core/world.js.html">lib/core/world.js</a><ul><li><a href="../../../docs/lib/core/world.js.html#World">World</a></li></ul></li><li><a href="../../../docs/lib/footer.js.html">lib/footer.js</a><ul></ul></li><li><a href="../../../docs/lib/header.js.html">lib/header.js</a><ul></ul></li><li><a href="../../../docs/lib/managers/asset_manager.js.html">lib/managers/asset_manager.js</a><ul><li><a href="../../../docs/lib/managers/asset_manager.js.html#AssetManager">AssetManager</a></li></ul></li><li><a href="../../../docs/lib/managers/group_manager.js.html">lib/managers/group_manager.js</a><ul><li><a href="../../../docs/lib/managers/group_manager.js.html#GroupManager">GroupManager</a></li></ul></li><li><a href="../../../docs/lib/managers/scene_manager.js.html">lib/managers/scene_manager.js</a><ul><li><a href="../../../docs/lib/managers/scene_manager.js.html#SceneManager">SceneManager</a></li></ul></li><li><a href="../../../docs/lib/struct/group.js.html">lib/struct/group.js</a><ul><li><a href="../../../docs/lib/struct/group.js.html#Group">Group</a></li></ul></li><li><a href="../../../docs/lib/struct/map.js.html">lib/struct/map.js</a><ul><li><a href="../../../docs/lib/struct/map.js.html#Map">Map</a></li></ul></li><li><a href="../../../docs/lib/struct/node.js.html">lib/struct/node.js</a><ul><li><a href="../../../docs/lib/struct/node.js.html#Node">Node</a></li></ul></li><li><a href="../../../docs/lib/struct/scene.js.html">lib/struct/scene.js</a><ul><li><a href="../../../docs/lib/struct/scene.js.html#Scene">Scene</a></li></ul></li><li><a href="../../../docs/lib/struct/system.js.html">lib/struct/system.js</a><ul><li><a href="../../../docs/lib/struct/system.js.html#System">System</a></li></ul></li><li><a href="../../../docs/lib/vendor/fiber.js.html">lib/vendor/fiber.js</a><ul></ul></li></ul></div><div class="nine columns"><div class="comment"><div class="label radius ctx-type">property</div><h1 id="Map">Map</h1><h5 class="subheader">Gust.Map</h5><div class="tags"><ul class="no-bullet"></ul></div><div class="description"></div><pre><code class="language-javascript">Gust.Map = Gust.Class.extend({
 
-});
+    lengthX: 0,
+    lengthY: 0,
+    defaultValue: 0,
 
-Gust.Timer.lastTime = 0;
+    init: function() {
+        this.clear();
+    },
 
-Gust.Timer.tick = function(){
-    var wall = Date.now();
-    var last = this.lastTime;
+    clear: function(){
+        this.map = [];
+        this.lengthX = 0;
+        this.lengthY = 0;
+    },
 
-    this.lastTime = wall;
+    reset: function(value){
+        for(var y = 0; y &lt; this.map.length; y++){
+            for(var x = 0; x &lt; this.map[0].length; x++){
+                this.map[y][x] = (value !== undefined) ? value : this.defaultValue;
+            }
+        }
 
-    return wall - last;
-};</code></pre></div></div></div><!-- Foundation JS--><script src="http://cdnjs.cloudflare.com/ajax/libs/foundation/3.2.2/javascripts/foundation.min.js"></script><script>/**
+        return this;
+    },
+
+    copy: function(map){
+        this.map = [];
+
+        for(var y=0; y&lt; map.length; y++){
+            this.map[y] = new Array(map.length);
+            for(var x = 0; x &lt; map[0].length; x++){
+                this.map[y][x] = map[y][x];
+            }
+        }
+
+        this.lengthX = map[0].length;
+        this.lengthY = map.length;
+
+        return this;
+    },
+
+    set: function(x, y, value) {
+
+        //increate y length
+        while (y &gt;= this.map.length) {
+            var m = new Array(this.map[0]);
+
+            for (var l in m) {
+                m[l] = this.defaultValue;
+            }
+
+            this.map.push(m);
+
+        }
+
+        //increase x length
+        while (x &gt;= this.map[this.map.length - 1].length) {
+
+            for (var k = 0; k &lt; this.map.length; k++) {
+                if (this.map[k].length &lt;= x) {
+                    this.map[k].push(this.defaultValue);
+                }
+            }
+
+        }
+
+        this.lengthX = this.map[y].length;
+        this.lengthY = this.map.length;
+
+        this.map[y][x] = value;
+
+        return this;
+    },
+
+    get: function(x, y) {
+        if (this.within(x, y)) {
+            return this.map[y][x];
+        }
+    },
+
+    within: function(x, y) {
+        return y &gt;= 0 &amp;&amp; y &lt; this.lengthY &amp;&amp; x &gt;= 0 &amp;&amp; x &lt; this.lengthX;
+    }
+
+});</code></pre></div></div></div><!-- Foundation JS--><script src="http://cdnjs.cloudflare.com/ajax/libs/foundation/3.2.2/javascripts/foundation.min.js"></script><script>/**
  * Prism: Lightweight, robust, elegant syntax highlighting
  * MIT license http://www.opensource.org/licenses/mit-license.php/
  * @author Lea Verou http://lea.verou.me
