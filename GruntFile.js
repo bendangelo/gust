@@ -24,8 +24,7 @@ module.exports = function(grunt) {
                     'lib/core/events.js',
                     'lib/core/*.js',
                     'lib/**/!(footer).js',
-                    'lib/footer.js'
-                    ],
+                    'lib/footer.js'],
                 dest: 'example/assets/vendor/<%= pkg.name %>.js'
             }
 
@@ -53,6 +52,10 @@ module.exports = function(grunt) {
             jade: {
                 files: ["test/index.jade"],
                 tasks: ["jade:test"]
+            },
+            release: {
+                files: ["lib/**/*.js"],
+                tasks: ["build:release"]
             }
         },
 
@@ -69,8 +72,7 @@ module.exports = function(grunt) {
                     run: true,
 
                     urls: [
-                        "http://localhost:" + port+1 + "/test/index.html"
-                    ]
+                        "http://localhost:" + port + 1 + "/test/index.html"]
 
                 }
 
@@ -80,7 +82,7 @@ module.exports = function(grunt) {
         connect: {
             test: {
                 options: {
-                    port: port+1,
+                    port: port + 1,
                     base: "."
                 }
             },
@@ -99,16 +101,13 @@ module.exports = function(grunt) {
             test: {
 
                 css: [
-                    "example/test/css/**/*.css"
-                ],
+                    "example/test/css/**/*.css"],
 
                 vendorjs: [
-                    "example/test/js/**/*.js"
-                ],
+                    "example/test/js/**/*.js"],
 
                 testjs: [
-                    'dist/test/tests/**/*.js'
-                ],
+                    'dist/test/tests/**/*.js'],
 
                 options: {
                     pretty: true,
@@ -133,8 +132,7 @@ module.exports = function(grunt) {
                 expand: true,
                 cwd: "test/tests",
                 src: [
-                    "**/*.coffee"
-                ],
+                    "**/*.coffee"],
                 dest: "dist/test/tests",
                 ext: ".js"
             }
