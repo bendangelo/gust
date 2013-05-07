@@ -6,7 +6,7 @@ module.exports = function(grunt) {
 
         pkg: grunt.file.readJSON('package.json'),
 
-        banner: "/* Entity Game Engine | MIT License */\n",
+        banner: "/* Gust <%= pkg.version %> | MIT License */\n",
 
         concat: {
 
@@ -24,8 +24,7 @@ module.exports = function(grunt) {
                     'lib/core/events.js',
                     'lib/core/*.js',
                     'lib/**/!(footer).js',
-                    'lib/footer.js'
-                    ],
+                    'lib/footer.js'],
                 dest: 'example/assets/vendor/<%= pkg.name %>.js'
             }
 
@@ -69,8 +68,7 @@ module.exports = function(grunt) {
                     run: true,
 
                     urls: [
-                        "http://localhost:" + port+1 + "/test/index.html"
-                    ]
+                        "http://localhost:" + port + 1 + "/test/index.html"]
 
                 }
 
@@ -80,7 +78,7 @@ module.exports = function(grunt) {
         connect: {
             test: {
                 options: {
-                    port: port+1,
+                    port: port + 1,
                     base: "."
                 }
             },
@@ -99,16 +97,13 @@ module.exports = function(grunt) {
             test: {
 
                 css: [
-                    "example/test/css/**/*.css"
-                ],
+                    "example/test/css/**/*.css"],
 
                 vendorjs: [
-                    "example/test/js/**/*.js"
-                ],
+                    "example/test/js/**/*.js"],
 
                 testjs: [
-                    'dist/test/tests/**/*.js'
-                ],
+                    'dist/test/tests/**/*.js'],
 
                 options: {
                     pretty: true,
@@ -133,8 +128,7 @@ module.exports = function(grunt) {
                 expand: true,
                 cwd: "test/tests",
                 src: [
-                    "**/*.coffee"
-                ],
+                    "**/*.coffee"],
                 dest: "dist/test/tests",
                 ext: ".js"
             }
@@ -169,6 +163,6 @@ module.exports = function(grunt) {
     grunt.registerTask('build:dev', ['concat:lib']);
     grunt.registerTask('build:release', ['build:dev', 'uglify:lib', 'dox']);
 
-    grunt.registerTask('default', ['build:test', 'build:release', 'server']);
+    grunt.registerTask('default', ['build:test', 'build:release']);
 
 };

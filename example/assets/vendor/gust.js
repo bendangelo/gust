@@ -1,4 +1,4 @@
-/* Entity Game Engine | MIT License */
+/* Gust 0.1.0 | MIT License */
 
 (function(window){var Gust;
 
@@ -27,7 +27,7 @@ Gust.$ = function(id){
 //     All Rights Reserved. Apache Software License 2.0
 //     http://www.apache.org/licenses/LICENSE-2.0
 
-(function () {
+(function() {
   /*jshint bitwise: true, camelcase: false, curly: true, eqeqeq: true,
     forin: false, immed: true, indent: 2, latedef: true, newcap: false,
     noarg: true, noempty: false, nonew: true, plusplus: false,
@@ -41,7 +41,7 @@ Gust.$ = function(id){
 
   /*global exports, global, define, module */
 
-  (function (root, factory) {
+  (function(root, factory) {
     if (typeof exports === 'object') {
       // Node. Does not work with strict CommonJS, but
       // only CommonJS-like environments that support module.exports,
@@ -49,14 +49,14 @@ Gust.$ = function(id){
       module.exports = factory(this);
     } else if (typeof define === 'function' && define.amd) {
       // AMD. Register as an anonymous module.
-      define(function () {
+      define(function() {
         return factory(root);
       });
     } else {
       // Browser globals (root is window)
       root.Fiber = factory(root);
     }
-  }(this, function (global) {
+  }(this, function(global) {
 
     // Baseline setup
     // --------------
@@ -65,14 +65,15 @@ Gust.$ = function(id){
     // to run the `init` function, or not.
     var initializing = false,
 
-    // Keep a few prototype references around - for speed access,
-    // and saving bytes in the minified version.
-    ArrayProto = Array.prototype,
+      // Keep a few prototype references around - for speed access,
+      // and saving bytes in the minified version.
+      ArrayProto = Array.prototype,
 
-    // Save the previous value of `Fiber`.
-    previousFiber = global.Fiber;
+      // Save the previous value of `Fiber`.
+      previousFiber = global.Fiber;
 
     // Helper function to copy properties from one object to the other.
+
     function copy(from, to) {
       var name;
       for (name in from) {
@@ -83,24 +84,26 @@ Gust.$ = function(id){
     }
 
     // The base `Fiber` implementation.
+
     function Fiber() {}
 
     // ###Extend
     //
     // Returns a subclass.
-    Fiber.extend = function (fn) {
+    Fiber.extend = function(fn) {
       // Keep a reference to the current prototye.
       var parent = this.prototype,
 
-      // Invoke the function which will return an object literal used to
-      // define the prototype. Additionally, pass in the parent prototype,
-      // which will allow instances to use it.
-      properties = (typeof fn === 'function') ? fn(parent) : fn,
+        // Invoke the function which will return an object literal used to
+        // define the prototype. Additionally, pass in the parent prototype,
+        // which will allow instances to use it.
+        properties = (typeof fn === 'function') ? fn(parent) : fn,
 
-      // Stores the constructor's prototype.
-      proto;
+        // Stores the constructor's prototype.
+        proto;
 
       // The constructor function for a subclass.
+
       function child() {
         if (!initializing) {
           // Custom initialization is done in the `init` method.
@@ -124,13 +127,13 @@ Gust.$ = function(id){
 
       // Add default `init` function, which a class may override; it should
       // call the super class' `init` function (if it exists);
-      proto.init = function () {
+      proto.init = function() {
         if (typeof parent.init === 'function') {
           parent.init.apply(this, arguments);
         }
       };
 
-       // Copy the properties over onto the new prototype.
+      // Copy the properties over onto the new prototype.
       copy(properties, proto);
 
       // Enforce the constructor to be what we expect.
@@ -164,10 +167,10 @@ Gust.$ = function(id){
     // - `Fiber.proxy( instance )`
     // - `Fiber.proxy( base, instance )`
     //
-    Fiber.proxy = function (base, instance) {
+    Fiber.proxy = function(base, instance) {
       var name,
-        iface = {},
-        wrap;
+      iface = {},
+      wrap;
 
       // If there's only 1 argument specified, then it is the instance,
       // thus infer `base` from its constructor.
@@ -178,8 +181,8 @@ Gust.$ = function(id){
 
       // Returns a function which calls another function with `instance` as
       // the context.
-      wrap = function (fn) {
-        return function () {
+      wrap = function(fn) {
+        return function() {
           return base[fn].apply(instance, arguments);
         };
       };
@@ -219,10 +222,10 @@ Gust.$ = function(id){
     //     Fiber.decorate(obj, Decorator);
     //     obj.greet(); // hi!
     //
-    Fiber.decorate = function (instance /*, decorator[s] */) {
+    Fiber.decorate = function(instance /*, decorator[s] */ ) {
       var i,
-        // Get the base prototype.
-        base = instance.constructor.__base__,
+      // Get the base prototype.
+      base = instance.constructor.__base__,
         // Get all the decorators in the arguments.
         decorators = ArrayProto.slice.call(arguments, 1),
         len = decorators.length,
@@ -230,7 +233,7 @@ Gust.$ = function(id){
 
       for (i = 0; i < len; i++) {
 
-        result = (typeof mixins[i] === 'function') ? decorators[i].call(instance, base) : mixins[i];
+        result = (typeof decorators[i] === 'function') ? decorators[i].call(instance, base) : decorators[i];
 
         copy(result, instance);
       }
@@ -269,10 +272,10 @@ Gust.$ = function(id){
     //     var obj = new Definition();
     //     obj.method2();
     //
-    Fiber.mixin = function (definition /*, mixin[s] */) {
+    Fiber.mixin = function(definition /*, mixin[s] */ ) {
       var i,
-        // Get the base prototype.
-        base = definition.__base__,
+      // Get the base prototype.
+      base = definition.__base__,
         // Get all the mixins in the arguments.
         mixins = ArrayProto.slice.call(arguments, 1),
         len = mixins.length,
@@ -290,14 +293,14 @@ Gust.$ = function(id){
     //
     // Run Fiber.js in *noConflict* mode, returning the `fiber` variable to
     // its previous owner. Returns a reference to the Fiber object.
-    Fiber.noConflict = function () {
+    Fiber.noConflict = function() {
       global.Fiber = previousFiber;
       return Fiber;
     };
 
     return Fiber;
   }));
-} ());
+}());
 Gust.Class = Fiber;
 Gust.Events = Gust.Class.extend({
 
@@ -323,9 +326,10 @@ Gust.Events = Gust.Class.extend({
             var types = this._events[name];
 
             if(types){
-                for(var i in types){
-                    if(types[i].callback == callback){
-                        types.splice(i, 1);
+                var length = types.length;
+                while(length--){
+                    if(types[length].callback == callback){
+                        types.splice(length, 1);
                     }
                 }
             }
@@ -338,7 +342,7 @@ Gust.Events = Gust.Class.extend({
     },
 
     trigger: function(type){
-        if(!this._events[type]) return this;
+        if(!this._events || !this._events[type]) return this;
 
         var events = this._events[type], e;
 
@@ -365,13 +369,20 @@ Gust.Events = Gust.Class.extend({
         return this;
     },
 
-    stopListening: function(){
-        // remove all for now
-        var e;
-        for(var i in this._listens){
-            e = this._listens[i];
+    stopListening: function(target, type, callback){
+
+        var i = this._listens.length;
+        while(i--){
+            var e = this._listens[i];
+
+            if(target && e.target != target ||
+                type && e.type != type ||
+                callback && e.callback != callback){
+                continue;
+            }
 
             e.target.off(e.type, e.callback);
+            this._listens.splice(i, 1);
         }
         return this;
     }
@@ -393,8 +404,10 @@ Gust.Manager = Gust.Events.extend({
         return this.items[key];
     },
 
-    remove: function(){
+    remove: function(key){
+        delete this.items[key];
 
+        return this;
     }
 
 });
@@ -512,16 +525,6 @@ Gust.World = Gust.Class.extend({
 });
 Gust.AssetManager = Gust.Manager.extend({
 
-    add: function(asset, key){
-        if(!key){
-            key = Gust.AssetManager.getSrcName(asset.src);
-        }
-
-        this.items[key] = asset;
-
-        return this;
-    }
-
 });
 
 Gust.AssetManager.srcName = function(src){
@@ -534,7 +537,7 @@ The GroupManager will add / remove nodes from groups.
 Example:
     this.groupManager = new GroupManager();
 
-    this.groupManager.track(new Gust.Monsters(), function(e){
+    this.groupManager.add("monsters", new Gust.Monsters(), function(e){
         return e instanceof Monster;
     });
 
@@ -561,6 +564,17 @@ Gust.GroupManager = Gust.Manager.extend({
             if (condition.call(this, node, group)) {
                 group.add(node);
             }
+        }
+
+        return this;
+    },
+
+    removeNode: function(node){
+        // this could become really slow
+        for(var i in this.items){
+            var group = this.items[i];
+
+            group.remove(node);
         }
 
         return this;
@@ -606,19 +620,22 @@ Example:
 */
 Gust.Group = Gust.Events.extend({
 
-    init: function(nodes){
+    length: 0,
+
+    init: function(nodes) {
         this.nodes = [];
 
-        if(nodes){
+        if (nodes) {
             this.add(nodes);
         }
     },
 
-    add: function(nodes, options){
+    add: function(nodes) {
         nodes = [].concat(nodes);
 
-        for(var i in nodes){
+        for (var i in nodes) {
             this.nodes.push(nodes[i]);
+            this.length++;
 
             this.trigger("add", nodes[i]);
         }
@@ -626,15 +643,16 @@ Gust.Group = Gust.Events.extend({
         return this;
     },
 
-    remove: function(nodes, options){
+    remove: function(nodes) {
         nodes = [].concat(nodes);
 
-        for(var i in nodes){
+        for (var i in nodes) {
             var node = nodes[i];
             var index = this.nodes.indexOf(node);
 
-            if(index != -1){
+            if (index != -1) {
                 this.nodes.splice(index, 1);
+                this.length--;
 
                 this.trigger("remove", node);
             }
@@ -643,14 +661,23 @@ Gust.Group = Gust.Events.extend({
         return this;
     },
 
-    at: function(index){
+    get: function(id) {
+        for (var i in this.nodes) {
+            var node = this.nodes[i];
+
+            if (node.id == id) return node;
+        }
+    },
+
+    at: function(index) {
         return this.nodes[index];
     },
 
-    clear: function(){
-        while(this.nodes.length){
+    clear: function() {
+        while (this.nodes.length) {
             this.trigger("remove", this.nodes.pop());
         }
+        this.length = 0;
 
         return this;
     }
@@ -662,33 +689,78 @@ Gust.Map = Gust.Class.extend({
     lengthY: 0,
     defaultValue: 0,
 
-    init: function() {
-        this.clear();
+    init: function(map) {
+        this.copy(map || [
+            []
+        ]);
     },
 
-    clear: function(){
-        this.map = [];
+    set: function(x, y, value) {
+
+        //increate y length
+        while (y >= this.data.length) {
+            var m = new Array(this.data[0]);
+
+            for (var l in m) {
+                m[l] = this.defaultValue;
+            }
+
+            this.data.push(m);
+
+        }
+
+        //increase x length
+        while (x >= this.data[this.data.length - 1].length) {
+
+            for (var k = 0; k < this.data.length; k++) {
+                if (this.data[k].length <= x) {
+                    this.data[k].push(this.defaultValue);
+                }
+            }
+
+        }
+
+        this.lengthX = this.data[y].length;
+        this.lengthY = this.data.length;
+
+        this.data[y][x] = value;
+
+        return this;
+    },
+
+    get: function(x, y) {
+        if (this.within(x, y)) {
+            return this.data[y][x];
+        }
+    },
+
+    within: function(x, y) {
+        return y >= 0 && y < this.lengthY && x >= 0 && x < this.lengthX;
+    },
+
+    clear: function() {
+        this.data = [];
         this.lengthX = 0;
         this.lengthY = 0;
     },
 
-    reset: function(value){
-        for(var y = 0; y < this.map.length; y++){
-            for(var x = 0; x < this.map[0].length; x++){
-                this.map[y][x] = (value !== undefined) ? value : this.defaultValue;
+    reset: function(value) {
+        for (var y = 0; y < this.data.length; y++) {
+            for (var x = 0; x < this.data[0].length; x++) {
+                this.data[y][x] = (value !== undefined) ? value : this.defaultValue;
             }
         }
 
         return this;
     },
 
-    copy: function(map){
-        this.map = [];
+    copy: function(map) {
+        this.data = [];
 
-        for(var y=0; y< map.length; y++){
-            this.map[y] = new Array(map.length);
-            for(var x = 0; x < map[0].length; x++){
-                this.map[y][x] = map[y][x];
+        for (var y = 0; y < map.length; y++) {
+            this.data[y] = new Array(map.length);
+            for (var x = 0; x < map[0].length; x++) {
+                this.data[y][x] = map[y][x];
             }
         }
 
@@ -696,94 +768,53 @@ Gust.Map = Gust.Class.extend({
         this.lengthY = map.length;
 
         return this;
-    },
-
-    set: function(x, y, value) {
-
-        //increate y length
-        while (y >= this.map.length) {
-            var m = new Array(this.map[0]);
-
-            for (var l in m) {
-                m[l] = this.defaultValue;
-            }
-
-            this.map.push(m);
-
-        }
-
-        //increase x length
-        while (x >= this.map[this.map.length - 1].length) {
-
-            for (var k = 0; k < this.map.length; k++) {
-                if (this.map[k].length <= x) {
-                    this.map[k].push(this.defaultValue);
-                }
-            }
-
-        }
-
-        this.lengthX = this.map[y].length;
-        this.lengthY = this.map.length;
-
-        this.map[y][x] = value;
-
-        return this;
-    },
-
-    get: function(x, y) {
-        if (this.within(x, y)) {
-            return this.map[y][x];
-        }
-    },
-
-    within: function(x, y) {
-        return y >= 0 && y < this.lengthY && x >= 0 && x < this.lengthX;
     }
 
 });
 Gust.Node = Gust.Events.extend({
 
     init: function(){
-
+        // this unique id can be used for groups
+        this.id = ++Gust.Node._id;
     }
 
 });
 
+Gust.Node._id = 0;
 Gust.Scene = Gust.Events.extend({
 
-    init: function(world){
+    init: function(world) {
         this.world = world;
     },
 
-    enter: function() {
+    enter: function(options) {
 
     },
 
-    exit: function() {
+    exit: function(options) {
 
     },
 
-    update: function(tick){
+    update: function(tick) {
 
     },
 
-    draw: function(context){
+    draw: function(context) {
 
     }
 
 });
 Gust.System = Gust.Class.extend({
 
-    init: function(group){
+    init: function(group) {
         this.group = group;
-        this.nodes = group.nodes;
     },
 
-    processAll: function(){
-        for(var i in this.nodes){
+    processAll: function() {
+        var nodes = this.group.nodes;
+        for (var i in nodes) {
             // process must be implemented
-            this.process(this.nodes[i]);
+            this.process(nodes[i]);
         }
     }
 

@@ -1,4 +1,4 @@
-describe "core/scene", ->
+describe "structs/scene", ->
     scene = null
 
     beforeEach ->
