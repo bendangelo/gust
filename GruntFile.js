@@ -52,6 +52,10 @@ module.exports = function(grunt) {
             jade: {
                 files: ["test/index.jade"],
                 tasks: ["jade:test"]
+            },
+            release: {
+                files: ["lib/**/*.js"],
+                tasks: ["build:release"]
             }
         },
 
