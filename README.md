@@ -60,6 +60,7 @@ Gust is not a game engine and does not provide support for graphics, sounds, pre
 
 * [EaselJS](http://www.createjs.com/#!/EaselJS)
 * [KineticJS](http://kineticjs.com/)
+* [pixi.js](https://github.com/GoodBoyDigital/pixi.js)
 
 ### 3D Graphics
 

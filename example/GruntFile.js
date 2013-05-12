@@ -6,7 +6,7 @@ module.exports = function(grunt) {
 
         pkg: grunt.file.readJSON('package.json'),
 
-        banner: "/* Example Game | MIT License */",
+        banner: "/* Example Game <%= pkg.version %> | MIT License */",
 
         concat: {
 
@@ -17,8 +17,7 @@ module.exports = function(grunt) {
                 },
 
                 src: [
-                    'lib/**/*.js'
-                    ],
+                    'lib/**/*.js'],
                 dest: '<%= pkg.name %>.js'
             }
 
@@ -51,8 +50,7 @@ module.exports = function(grunt) {
                     run: true,
 
                     urls: [
-                        "http://localhost:" + port+1 + "/dist/test/index.html"
-                    ]
+                        "http://localhost:" + port + 1 + "/dist/test/index.html"]
 
                 }
 
@@ -62,7 +60,7 @@ module.exports = function(grunt) {
         connect: {
             test: {
                 options: {
-                    port: port+1,
+                    port: port + 1,
                     base: "."
                 }
             },
@@ -88,24 +86,19 @@ module.exports = function(grunt) {
             test: {
 
                 testcss: [
-                    "test/css/**/*.css"
-                ],
+                    "test/css/**/*.css"],
 
                 css: [
-                    "assets/stylesheets/**/*.css"
-                ],
+                    "assets/stylesheets/**/*.css"],
 
                 testvendorjs: [
-                    "test/js/**/*.js"
-                ],
+                    "test/js/**/*.js"],
 
                 testjs: [
-                    "test/tests/**/*_test.js"
-                ],
+                    "test/tests/**/*_test.js"],
 
                 vendorjs: [
-                    "assets/vendor/**/*.js"
-                ],
+                    "assets/vendor/**/*.js"],
 
                 options: {
                     pretty: true,
@@ -128,12 +121,10 @@ module.exports = function(grunt) {
             play: {
 
                 css: [
-                    "assets/stylesheets/**/*.css"
-                ],
+                    "assets/stylesheets/**/*.css"],
 
                 vendorjs: [
-                    "assets/vendor/**/*.js"
-                ],
+                    "assets/vendor/**/*.js"],
 
                 options: {
                     pretty: true,
