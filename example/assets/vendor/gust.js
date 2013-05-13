@@ -762,6 +762,22 @@ Gust.Map = Gust.Class.extend({
         this.lengthY = map.length;
 
         return this;
+    },
+
+    forEach: function(callback, context) {
+        for (var y = 0; y < this.data.length; y++) {
+            for (var x = 0; x < this.data[0].length; x++) {
+
+                var item = this.get(x, y);
+
+                if (callback.call(context || this, item, x, y) === false) {
+                    break;
+                }
+
+            }
+        }
+
+        return this;
     }
 
 });

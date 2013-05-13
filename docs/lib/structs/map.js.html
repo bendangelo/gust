@@ -102,6 +102,22 @@ code {
         this.lengthY = map.length;
 
         return this;
+    },
+
+    forEach: function(callback, context) {
+        for (var y = 0; y &lt; this.data.length; y++) {
+            for (var x = 0; x &lt; this.data[0].length; x++) {
+
+                var item = this.get(x, y);
+
+                if (callback.call(context || this, item, x, y) === false) {
+                    break;
+                }
+
+            }
+        }
+
+        return this;
     }
 
 });</code></pre></div></div></div><!-- Foundation JS--><script src="http://cdnjs.cloudflare.com/ajax/libs/foundation/3.2.2/javascripts/foundation.min.js"></script><script>/**
