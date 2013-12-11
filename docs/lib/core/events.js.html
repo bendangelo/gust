@@ -28,7 +28,9 @@ code {
             this._events[name] = [];
         }
 
-        console.assert(callback, &quot;Event callback is null&quot;);
+        if(!callback){
+            throw &quot;Event callback is null&quot;;
+        }
 
         this._events[name].push({callback: callback, context: context || this});
 

@@ -23,12 +23,13 @@ code {
 
     enter: function(name, options) {
         if (this.current) {
-            this.current.exit();
+            if(this.current.exit() === false){
+                // stop entering new scene
+                return;
+            }
         }
 
         this.current = this.items[name];
-
-        console.assert(this.current, &quot;Scene selected is null&quot;);
 
         this.current.enter(options);
     },

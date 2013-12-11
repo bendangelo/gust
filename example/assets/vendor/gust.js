@@ -313,7 +313,9 @@ Gust.Events = Gust.Class.extend({
             this._events[name] = [];
         }
 
-        console.assert(callback, "Event callback is null");
+        if(!callback){
+            throw "Event callback is null";
+        }
 
         this._events[name].push({callback: callback, context: context || this});
 
@@ -467,7 +469,6 @@ Gust.World = Gust.Class.extend({
 
     start: function(){
         if(!this.running){
-            console.assert(this.sceneManager.current, "Current scene is null");
             this.running = true;
 
             this._requestAnim();
@@ -581,12 +582,13 @@ Gust.SceneManager = Gust.Manager.extend({
 
     enter: function(name, options) {
         if (this.current) {
-            this.current.exit();
+            if(this.current.exit() === false){
+                // stop entering new scene
+                return;
+            }
         }
 
         this.current = this.items[name];
-
-        console.assert(this.current, "Scene selected is null");
 
         this.current.enter(options);
     },
