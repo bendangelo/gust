@@ -22,6 +22,8 @@ code {
     current: null,
 
     enter: function(name, options) {
+        options = options || {};
+
         if (this.current) {
             if(this.current.exit &amp;&amp; this.current.exit(options) === false){
                 // stop entering new scene

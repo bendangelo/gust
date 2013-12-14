@@ -581,6 +581,8 @@ Gust.SceneManager = Gust.Manager.extend({
     current: null,
 
     enter: function(name, options) {
+        options = options || {};
+
         if (this.current) {
             if(this.current.exit && this.current.exit(options) === false){
                 // stop entering new scene
