@@ -23,7 +23,7 @@ code {
 
     enter: function(name, options) {
         if (this.current) {
-            if(this.current.exit() === false){
+            if(this.current.exit &amp;&amp; this.current.exit(options) === false){
                 // stop entering new scene
                 return;
             }
