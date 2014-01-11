@@ -1,4 +1,4 @@
-/* Gust 0.1.0 | MIT License */
+/* Gust 0.1.2 | MIT License */
 
 (function(window){var Gust;
 
@@ -372,6 +372,9 @@ Gust.Events = Gust.Class.extend({
     },
 
     stopListening: function(target, type, callback){
+        if(!this._listens){
+            return this;
+        }
 
         var i = this._listens.length;
         while(i--){
@@ -584,7 +587,7 @@ Gust.SceneManager = Gust.Manager.extend({
         options = options || {};
 
         if (this.current) {
-            if(this.current.exit && this.current.exit(options) === false){
+            if(this.current.exit(options) === false){
                 // stop entering new scene
                 return;
             }

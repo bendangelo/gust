@@ -25,7 +25,7 @@ code {
         options = options || {};
 
         if (this.current) {
-            if(this.current.exit &amp;&amp; this.current.exit(options) === false){
+            if(this.current.exit(options) === false){
                 // stop entering new scene
                 return;
             }

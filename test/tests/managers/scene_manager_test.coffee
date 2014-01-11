@@ -29,3 +29,5 @@ describe "managers/scene_manager", ->
         sceneManager.draw()
 
         expect(stub).to.be.called
+
+    it "should pass options to exit method"

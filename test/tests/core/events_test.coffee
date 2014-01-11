@@ -44,6 +44,11 @@ describe "core/events", ->
             blah.listenTo(event, "hello", call)
             blah.listenTo(event, "hey", call)
 
+        it "should stop listening without events", ->
+            blah = new Gust.Events()
+
+            expect(blah.stopListening()).to.equal(blah)
+
         it "to callback", ->
 
             blah.stopListening event, "hello", call

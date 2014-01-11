@@ -87,6 +87,9 @@ code {
     },
 
     stopListening: function(target, type, callback){
+        if(!this._listens){
+            return this;
+        }
 
         var i = this._listens.length;
         while(i--){
