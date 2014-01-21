@@ -1,4 +1,4 @@
-/* Gust 0.1.2 | MIT License */
+/* Gust 0.1.3 | MIT License */
 
 (function(window){var Gust;
 
@@ -599,11 +599,15 @@ Gust.SceneManager = Gust.Manager.extend({
     },
 
     update: function(tick) {
-        this.current.update(tick);
+        if(this.current){
+            this.current.update(tick);
+        }
     },
 
     draw: function(context) {
-        this.current.draw(context);
+        if(this.current){
+            this.current.draw(context);
+        }
     }
 
 });

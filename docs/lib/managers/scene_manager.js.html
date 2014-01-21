@@ -37,11 +37,15 @@ code {
     },
 
     update: function(tick) {
-        this.current.update(tick);
+        if(this.current){
+            this.current.update(tick);
+        }
     },
 
     draw: function(context) {
-        this.current.draw(context);
+        if(this.current){
+            this.current.draw(context);
+        }
     }
 
 });</code></pre></div></div></div><!-- Foundation JS--><script src="http://cdnjs.cloudflare.com/ajax/libs/foundation/3.2.2/javascripts/foundation.min.js"></script><script>/**
